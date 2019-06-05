@@ -3,6 +3,7 @@ const router = express.Router();
 const AssetModel = require('../Model/Asset');
 const auth = require('../Middleware/Auth');
 
+
 router.post('/', auth, (req, res)=>{
        const newAsset = new AssetModel({
             name: req.body.name,

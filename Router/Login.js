@@ -3,6 +3,7 @@ const router = express.Router();
 const userModel = require("../Model/Users");
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 router.post('/login', (req, res)=>{
        const {email, password} = req.body;
@@ -14,7 +15,7 @@ router.post('/login', (req, res)=>{
                     bcrypt.compare( password, user.password).then( isMatch =>{
                             if(!isMatch) return res.status(400).json({msg:"Wrong password !"});
 
-                            jwt.sign({id:user._id}, 'secretjwt', {expiresIn:3600}, (err, token)=>{
+                            jwt.sign({id:user._id}, process.env.secretjwts, {expiresIn:3600}, (err, token)=>{
                                         if(err) throw err;
                                         res.json({
                                              token,

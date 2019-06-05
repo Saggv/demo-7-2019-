@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
@@ -8,7 +9,7 @@ const Login = require('./Router/Login');
 const Asset = require('./Router/Asset');
 
 //connect with mongoose 
-mongoose.connect('mongodb://localhost:27017/myapp', { useNewUrlParser: true })
+mongoose.connect(process.env.MongooseURL, { useNewUrlParser: true })
 
 const app= express();
 

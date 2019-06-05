@@ -3,6 +3,7 @@ const userModel = require('../Model/Users');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 router.post('/resigter', (req, res)=>{
         const {name, email, password} = req.body;
@@ -23,7 +24,7 @@ router.post('/resigter', (req, res)=>{
 
                                   newuser.password = hash;
                                   newuser.save().then( user =>{
-                                           jwt.sign( {id: user.id}, 'secretjwt', {expiresIn: 3600}, (err, token)=>{
+                                           jwt.sign( {id: user.id}, process.env.secretjwts, {expiresIn: 3600}, (err, token)=>{
                                                       if(err) throw err;
                                                       res.json({
                                                            token,
