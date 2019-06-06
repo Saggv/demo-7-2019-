@@ -15,7 +15,7 @@ const app= express();
 
 
 
-
+const port = process.env.PORT || 7000;
 //body parser
 const bodyParser = require('body-parser');
 app.use(express.json());
@@ -37,5 +37,5 @@ if(process.env.NODE_ENV === 'production'){
             res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
     })
 }
-const port = process.env.PORT || 7000;
+
 app.listen( port, ()=>console.log(`Sever start on ${port}`))
