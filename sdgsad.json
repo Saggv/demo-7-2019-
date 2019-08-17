@@ -1,0 +1,22 @@
+[
+    {
+        "name": "toi",
+        "email": "toi@gmail.com",
+        "password": "1234",
+        "DATA": [],
+        "date": "26/7/2019"
+   },
+   
+   "/////  Sau khi update thong tin ",
+   {
+        "name": "toi",
+        "email": "toi@gmail.com",
+        "password": "1234",
+        "DATA": 
+           [
+                {"ngay":"20/9/2019", "tenphong":"309", "sotien":"$0879"},
+                {"ngay":"20/9/2019", "tenphong":"309", "sotien":"$0879"}
+           ],
+        "date": "26/7/2019"
+   }
+]

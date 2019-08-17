@@ -1,41 +1,31 @@
-require('dotenv').config();
-const express = require('express');
-const mongoose = require('mongoose');
-const path = require('path');
-//require router
-const Product = require('./Router/Product');
+const express = require("express");
+const mongoose = require("mongoose");
+
+// require Router
 const Register = require('./Router/Register');
 const Login = require('./Router/Login');
-const Asset = require('./Router/Asset');
+const HotelRomm = require('./Router/HotelRoom');
+const Booking = require('./Router/Booking');
+const Admin = require('./Router/Admin');
 
-//connect with mongoose 
-mongoose.connect(process.env.MongooseURL, { useNewUrlParser: true })
+//connnect to mongoose
+mongoose.connect('mongodb://localhost/hotel',{ useNewUrlParser: true },()=>{
+      console.log("connect to mongodb success")
+})
+mongoose.set('useCreateIndex', true);
 
-const app= express();
+const app = express();
 
-
-
-
-//body parser
 const bodyParser = require('body-parser');
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 
+app.use('/', HotelRomm);
+app.use('/register', Register);
+app.use('/login', Login);
+app.use('/', Booking);
+app.use('/', Admin)
 
-app.use('/', Product);
-app.use('/', Register);
-app.use('/', Login);
-app.use('/asset', Asset);
-
-//serve static assets if in production
-if(process.env.NODE_ENV === 'production'){
-    //set static folder
-    app.use(express.static('client/build'));
-
-    app.get('*', (req, res) =>{
-            res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-    })
-}
 const port = process.env.PORT || 7000;
-app.listen( port, ()=>console.log(`Sever start on ${port}`))
+app.listen( port, ()=> console.log(`Server run on port ${port}`));
